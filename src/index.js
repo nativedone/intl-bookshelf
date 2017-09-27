@@ -7,6 +7,8 @@ import en from 'react-intl/locale-data/en'
 import es from 'react-intl/locale-data/es'
 import fr from 'react-intl/locale-data/fr'
 
+// Messages to be translated
+import { flattenMessages } from './utils'
 import messages from './messages'
 
 import './index.css';
@@ -25,8 +27,9 @@ let locale =
     || navigator.userLanguage // usually internet explorer
     || fallbackLanguage
 
+// Render a HoC component to provide translation to whole app
 ReactDOM.render(
-    <IntlProvider locale={locale} messages={messages[locale]}>
+    <IntlProvider locale={locale} messages={flattenMessages(messages[locale])}>
         <App />
     </IntlProvider>, 
     document.getElementById('root')
