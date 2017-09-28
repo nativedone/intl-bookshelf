@@ -19,7 +19,7 @@ const locale = userLocale()
 const BookDetail = ({match}) => {
   const book = books.find(book => book.id === parseInt(match.params.bookId, 10));
   const sortedReviews = sortBy(book.reviews, 'date').reverse();
-  const averageRating = round(meanBy(book.reviews, (r) => r.rating), 2);
+  const averageRating = book.reviews.length ? round(meanBy(book.reviews, (r) => r.rating), 2) : 0;
 
   return (
     <div className="BookDetail">
@@ -67,7 +67,11 @@ const BookDetail = ({match}) => {
       <h2>
         <FormattedMessage id="detail.reviewsHeading"/>
       </h2>
-      <h3><FormattedMessage id="detail.averageRating" values={{avg: averageRating}}/> ({book.reviews.length} Reviews)</h3>
+      <h3>
+        <FormattedMessage
+          id="detail.averageRating"
+          values={{avg: averageRating, count: book.reviews.length}}/>
+      </h3>
       <div className="BookDetail-reviews">
         {sortedReviews.map((review) => (
           <div className="Review" key={review.date}>
