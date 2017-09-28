@@ -70,7 +70,8 @@ const BookDetail = ({match}) => {
       <h3>
         <FormattedMessage
           id="detail.averageRating"
-          values={{avg: averageRating, count: book.reviews.length}}/>
+          values={{avg: averageRating, count: book.reviews.length}}
+        />
       </h3>
       <div className="BookDetail-reviews">
         {sortedReviews.map((review) => (
