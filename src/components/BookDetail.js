@@ -1,8 +1,20 @@
 import React from 'react';
-import { FormattedMessage, FormattedHTMLMessage, FormattedDate, FormattedTime, FormattedRelative } from 'react-intl'
+import {
+  FormattedMessage,
+  FormattedHTMLMessage,
+  FormattedDate,
+  FormattedTime,
+  FormattedRelative,
+  FormattedNumber
+} from 'react-intl'
 import {meanBy, round, sortBy} from 'lodash';
 
 import books from '../books.json';
+
+import { userLocale } from '../utils'
+
+// Get the use's locale
+const locale = userLocale()
 
 const BookDetail = ({match}) => {
   const book = books.find(book => book.id === parseInt(match.params.bookId, 10));
@@ -36,7 +48,16 @@ const BookDetail = ({match}) => {
           <a href={merchant.link} className="Merchant" key={merchant.name} target="_blank">
             <img src={merchant.icon} width="32" height="32" alt={merchant.name}/>
             <strong>{merchant.name}</strong>
-            <p>{merchant.price}</p>
+            
+            <p>
+              <FormattedNumber
+                value={merchant.price[locale]}
+                style="currency"
+                currencyDisplay="symbol"
+                currency={locale === 'en-US' ? 'USD' : 'EUR'}
+              />
+            </p>
+            
           </a>
         ))}
       </div>
