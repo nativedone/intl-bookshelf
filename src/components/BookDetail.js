@@ -55,7 +55,13 @@ const BookDetail = ({match}) => {
               <p>
                 <FormattedMessage id="detail.userRating" values={{name:<strong>{review.name}</strong>, rating:review.rating}}/>
                 <br />
-                <FormattedDate
+              {/*   <FormattedDate
+                  value={new Date(review.date)}
+                  year="2-digit"
+                  month="2-digit"
+                  day="2-digit"
+                /> */}
+                <FormattedTime
                   value={new Date(review.date)}
                   year="2-digit"
                   month="2-digit"
