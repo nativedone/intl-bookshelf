@@ -14,3 +14,15 @@ export function flattenMessages(nestedMessages, prefix = '') {
       return messages;
     }, {});
   }
+
+
+  // Get the use's locale
+const fallbackLanguage = 'en-US'
+const preferedUserLanguage = navigator.languages[0]
+export const userLocale = () => (
+  (navigator.languages && preferedUserLanguage)
+  || navigator.language // if it doesn't support navigator.languages
+  || navigator.userLanguage // usually internet explorer
+  || fallbackLanguage
+)
+    
