@@ -12,11 +12,6 @@ import {meanBy, round, sortBy} from 'lodash';
 
 import books from '../books.json';
 
-import { userLocale } from '../utils'
-
-// Get the use's locale
-const locale = userLocale()
-
 const BookDetail = ({match, intl}) => {
   const book = books.find(book => book.id === parseInt(match.params.bookId, 10));
   const sortedReviews = sortBy(book.reviews, 'date').reverse();
@@ -52,10 +47,10 @@ const BookDetail = ({match, intl}) => {
             
             <p>
               <FormattedNumber
-                value={merchant.price[locale]}
+                value={merchant.price[intl.locale]}
                 style="currency"
                 currencyDisplay="symbol"
-                currency={locale === 'en-US' ? 'USD' : 'EUR'}
+                currency={intl.locale === 'en-US' ? 'USD' : 'EUR'}
               />
             </p>
             
