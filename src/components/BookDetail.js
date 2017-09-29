@@ -5,7 +5,8 @@ import {
   FormattedDate,
   FormattedTime,
   FormattedRelative,
-  FormattedNumber
+  FormattedNumber,
+  injectIntl
 } from 'react-intl'
 import {meanBy, round, sortBy} from 'lodash';
 
@@ -16,7 +17,7 @@ import { userLocale } from '../utils'
 // Get the use's locale
 const locale = userLocale()
 
-const BookDetail = ({match}) => {
+const BookDetail = ({match, intl}) => {
   const book = books.find(book => book.id === parseInt(match.params.bookId, 10));
   const sortedReviews = sortBy(book.reviews, 'date').reverse();
   const averageRating = book.reviews.length ? round(meanBy(book.reviews, (r) => r.rating), 2) : 0;
@@ -104,8 +105,11 @@ const BookDetail = ({match}) => {
           </div>
         ))}
       </div>
+
+      <textarea placeholder={intl.formatMessage({id: 'detail.inputPlaceholder' })}  />
+      
     </div>
   )
 }
 
-export default BookDetail;
+export default injectIntl(BookDetail);
