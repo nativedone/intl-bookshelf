@@ -15,7 +15,26 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-// Instantiate the addLocaleData
+if(!window.Intl){
+    require.ensure([
+       'intl',
+       'intl/locale-data/jsonp/en.js',
+       'intl/locale-data/jsonp/es.js', 
+       'intl/locale-data/jsonp/fr.js'
+    ], (require) => {
+        require('intl');
+        require('intl/locale-data/jsonp/en.js');
+        require('intl/locale-data/jsonp/es.js');
+        require('intl/locale-data/jsonp/fr.js');
+    });
+
+    runApp();
+} else {
+    runApp();
+}
+
+function runApp() {
+    // Instantiate the addLocaleData
 addLocaleData([...en, ...es, ...fr])
 
 // Get the use's locale
@@ -30,3 +49,6 @@ ReactDOM.render(
 );
 
 registerServiceWorker();
+
+}
+
